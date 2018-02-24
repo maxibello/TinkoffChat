@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9448D8F0203DD36D00D6D4B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448D8EF203DD36D00D6D4B3 /* AppDelegate.swift */; };
 		9448D8F2203DD36D00D6D4B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448D8F1203DD36D00D6D4B3 /* ViewController.swift */; };
-		9448D8F5203DD36D00D6D4B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9448D8F3203DD36D00D6D4B3 /* Main.storyboard */; };
 		9448D8F7203DD36D00D6D4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */; };
 		9448D8FA203DD36D00D6D4B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9448D8F8203DD36D00D6D4B3 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,7 +17,6 @@
 		9448D8EC203DD36D00D6D4B3 /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9448D8EF203DD36D00D6D4B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9448D8F1203DD36D00D6D4B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9448D8F4203DD36D00D6D4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9448D8F9203DD36D00D6D4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9448D8FB203DD36D00D6D4B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,7 +54,6 @@
 			children = (
 				9448D8EF203DD36D00D6D4B3 /* AppDelegate.swift */,
 				9448D8F1203DD36D00D6D4B3 /* ViewController.swift */,
-				9448D8F3203DD36D00D6D4B3 /* Main.storyboard */,
 				9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */,
 				9448D8F8203DD36D00D6D4B3 /* LaunchScreen.storyboard */,
 				9448D8FB203DD36D00D6D4B3 /* Info.plist */,
@@ -125,7 +122,6 @@
 			files = (
 				9448D8FA203DD36D00D6D4B3 /* LaunchScreen.storyboard in Resources */,
 				9448D8F7203DD36D00D6D4B3 /* Assets.xcassets in Resources */,
-				9448D8F5203DD36D00D6D4B3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,14 +140,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9448D8F3203DD36D00D6D4B3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9448D8F4203DD36D00D6D4B3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9448D8F8203DD36D00D6D4B3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -281,7 +269,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxibello.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -296,7 +284,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxibello.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
