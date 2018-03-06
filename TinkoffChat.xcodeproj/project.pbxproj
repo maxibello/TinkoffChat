@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9448D8F0203DD36D00D6D4B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448D8EF203DD36D00D6D4B3 /* AppDelegate.swift */; };
-		9448D8F2203DD36D00D6D4B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448D8F1203DD36D00D6D4B3 /* ViewController.swift */; };
+		9448D8F2203DD36D00D6D4B3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448D8F1203DD36D00D6D4B3 /* ProfileViewController.swift */; };
 		9448D8F7203DD36D00D6D4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */; };
 		9448D8FA203DD36D00D6D4B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9448D8F8203DD36D00D6D4B3 /* LaunchScreen.storyboard */; };
 		946F9FEF20470E6E00A337CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 946F9FEE20470E6E00A337CC /* Main.storyboard */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		9448D8EC203DD36D00D6D4B3 /* TinkoffChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9448D8EF203DD36D00D6D4B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9448D8F1203DD36D00D6D4B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9448D8F1203DD36D00D6D4B3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9448D8F9203DD36D00D6D4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9448D8FB203DD36D00D6D4B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				9448D8EF203DD36D00D6D4B3 /* AppDelegate.swift */,
-				9448D8F1203DD36D00D6D4B3 /* ViewController.swift */,
+				9448D8F1203DD36D00D6D4B3 /* ProfileViewController.swift */,
 				9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */,
 				9448D8F8203DD36D00D6D4B3 /* LaunchScreen.storyboard */,
 				9448D8FB203DD36D00D6D4B3 /* Info.plist */,
@@ -136,7 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9448D8F2203DD36D00D6D4B3 /* ViewController.swift in Sources */,
+				9448D8F2203DD36D00D6D4B3 /* ProfileViewController.swift in Sources */,
 				9448D8F0203DD36D00D6D4B3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +269,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BG574YTP82;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxibello.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -284,6 +285,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BG574YTP82;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxibello.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
