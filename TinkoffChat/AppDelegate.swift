@@ -18,12 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         appTransition(funcName: #function)
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        
-        if let _window = window {
-            _window.rootViewController = ViewController()
-            _window.makeKeyAndVisible()
-        }
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//        
+//        if let _window = window {
+//            _window.rootViewController = ViewController()
+//            _window.makeKeyAndVisible()
+//        }
         
         return true
     }
