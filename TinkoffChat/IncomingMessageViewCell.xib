@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingMessageCell" id="KGk-i7-Jjw" customClass="MessageViewCell" customModule="TinkoffChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgZ-TB-Nvm" customClass="BubbleView" customModule="TinkoffChat" customModuleProvider="target">
+                        <rect key="frame" x="4" y="4" width="240" height="35.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQ8-lo-392">
+                                <rect key="frame" x="10" y="10" width="220" height="5.5"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="MQ8-lo-392" firstAttribute="top" secondItem="qgZ-TB-Nvm" secondAttribute="top" constant="10" id="XFl-Mn-c2t"/>
+                            <constraint firstItem="MQ8-lo-392" firstAttribute="leading" secondItem="qgZ-TB-Nvm" secondAttribute="leading" constant="10" id="a4p-qA-HRI"/>
+                            <constraint firstAttribute="bottom" secondItem="MQ8-lo-392" secondAttribute="bottom" constant="20" id="p9I-Hn-xal"/>
+                            <constraint firstAttribute="trailing" secondItem="MQ8-lo-392" secondAttribute="trailing" constant="10" id="u1c-fg-1ER"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="qgZ-TB-Nvm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="69R-1P-sx6"/>
+                    <constraint firstAttribute="bottom" secondItem="qgZ-TB-Nvm" secondAttribute="bottom" constant="4" id="ByR-Rh-0yN"/>
+                    <constraint firstItem="qgZ-TB-Nvm" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.75" id="WdU-jy-rbr"/>
+                    <constraint firstItem="qgZ-TB-Nvm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="yxN-Zu-KjP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="bubbleView" destination="qgZ-TB-Nvm" id="U0u-s9-RnX"/>
+                <outlet property="messageLabel" destination="MQ8-lo-392" id="oU8-H0-QgP"/>
+                <outlet property="textLabel" destination="MQ8-lo-392" id="t3D-5k-mlR"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

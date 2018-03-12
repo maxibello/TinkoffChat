@@ -11,7 +11,18 @@
 		9448D8F2203DD36D00D6D4B3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9448D8F1203DD36D00D6D4B3 /* ProfileViewController.swift */; };
 		9448D8F7203DD36D00D6D4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */; };
 		9448D8FA203DD36D00D6D4B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9448D8F8203DD36D00D6D4B3 /* LaunchScreen.storyboard */; };
+		946BCA232055845E0041DE5F /* OutcomingMessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946BCA212055845E0041DE5F /* OutcomingMessageViewCell.xib */; };
 		946F9FEF20470E6E00A337CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 946F9FEE20470E6E00A337CC /* Main.storyboard */; };
+		948EE869205285AD009756F1 /* ConversationsListVeiwControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE868205285AD009756F1 /* ConversationsListVeiwControllerTableViewController.swift */; };
+		948EE86B2052884E009756F1 /* ConversationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE86A2052884E009756F1 /* ConversationViewCell.swift */; };
+		948EE86E205297F1009756F1 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE86D205297F1009756F1 /* Conversation.swift */; };
+		948EE8702052A347009756F1 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE86F2052A347009756F1 /* TestData.swift */; };
+		948EE8722053E30D009756F1 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE8712053E30D009756F1 /* Functions.swift */; };
+		948EE8742054648A009756F1 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE8732054648A009756F1 /* ConversationViewController.swift */; };
+		948EE8772054663C009756F1 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE8752054663C009756F1 /* MessageViewCell.swift */; };
+		948EE8782054663C009756F1 /* IncomingMessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 948EE8762054663C009756F1 /* IncomingMessageViewCell.xib */; };
+		948EE87E20546729009756F1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE87D20546729009756F1 /* Message.swift */; };
+		948EE88020557405009756F1 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE87F20557405009756F1 /* BubbleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +32,18 @@
 		9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9448D8F9203DD36D00D6D4B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9448D8FB203DD36D00D6D4B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		946BCA212055845E0041DE5F /* OutcomingMessageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutcomingMessageViewCell.xib; sourceTree = "<group>"; };
 		946F9FEE20470E6E00A337CC /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		948EE868205285AD009756F1 /* ConversationsListVeiwControllerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListVeiwControllerTableViewController.swift; sourceTree = "<group>"; };
+		948EE86A2052884E009756F1 /* ConversationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCell.swift; sourceTree = "<group>"; };
+		948EE86D205297F1009756F1 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		948EE86F2052A347009756F1 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		948EE8712053E30D009756F1 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		948EE8732054648A009756F1 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		948EE8752054663C009756F1 /* MessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCell.swift; sourceTree = "<group>"; };
+		948EE8762054663C009756F1 /* IncomingMessageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingMessageViewCell.xib; sourceTree = "<group>"; };
+		948EE87D20546729009756F1 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		948EE87F20557405009756F1 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +76,33 @@
 		9448D8EE203DD36D00D6D4B3 /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
+				948EE86C205297D4009756F1 /* Model */,
 				9448D8EF203DD36D00D6D4B3 /* AppDelegate.swift */,
 				9448D8F1203DD36D00D6D4B3 /* ProfileViewController.swift */,
 				9448D8F6203DD36D00D6D4B3 /* Assets.xcassets */,
 				9448D8F8203DD36D00D6D4B3 /* LaunchScreen.storyboard */,
 				9448D8FB203DD36D00D6D4B3 /* Info.plist */,
 				946F9FEE20470E6E00A337CC /* Main.storyboard */,
+				948EE868205285AD009756F1 /* ConversationsListVeiwControllerTableViewController.swift */,
+				948EE86A2052884E009756F1 /* ConversationViewCell.swift */,
+				948EE8712053E30D009756F1 /* Functions.swift */,
+				948EE8732054648A009756F1 /* ConversationViewController.swift */,
+				948EE8752054663C009756F1 /* MessageViewCell.swift */,
+				948EE8762054663C009756F1 /* IncomingMessageViewCell.xib */,
+				948EE87F20557405009756F1 /* BubbleView.swift */,
+				946BCA212055845E0041DE5F /* OutcomingMessageViewCell.xib */,
 			);
 			path = TinkoffChat;
+			sourceTree = "<group>";
+		};
+		948EE86C205297D4009756F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				948EE86D205297F1009756F1 /* Conversation.swift */,
+				948EE87D20546729009756F1 /* Message.swift */,
+				948EE86F2052A347009756F1 /* TestData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,9 +164,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				948EE8782054663C009756F1 /* IncomingMessageViewCell.xib in Resources */,
 				946F9FEF20470E6E00A337CC /* Main.storyboard in Resources */,
 				9448D8FA203DD36D00D6D4B3 /* LaunchScreen.storyboard in Resources */,
 				9448D8F7203DD36D00D6D4B3 /* Assets.xcassets in Resources */,
+				946BCA232055845E0041DE5F /* OutcomingMessageViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +179,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				948EE87E20546729009756F1 /* Message.swift in Sources */,
 				9448D8F2203DD36D00D6D4B3 /* ProfileViewController.swift in Sources */,
+				948EE869205285AD009756F1 /* ConversationsListVeiwControllerTableViewController.swift in Sources */,
+				948EE8742054648A009756F1 /* ConversationViewController.swift in Sources */,
 				9448D8F0203DD36D00D6D4B3 /* AppDelegate.swift in Sources */,
+				948EE8702052A347009756F1 /* TestData.swift in Sources */,
+				948EE88020557405009756F1 /* BubbleView.swift in Sources */,
+				948EE86B2052884E009756F1 /* ConversationViewCell.swift in Sources */,
+				948EE8772054663C009756F1 /* MessageViewCell.swift in Sources */,
+				948EE8722053E30D009756F1 /* Functions.swift in Sources */,
+				948EE86E205297F1009756F1 /* Conversation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
