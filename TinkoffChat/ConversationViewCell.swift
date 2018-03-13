@@ -22,8 +22,13 @@ class ConversationViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configureCell(conversationCell: Conversation) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
         backgroundColor = UIColor.clear
+    }
+    
+    func configureCell(conversationCell: Conversation) {
+        
         tintColor = UIColor.black
         selectionStyle = .none
         

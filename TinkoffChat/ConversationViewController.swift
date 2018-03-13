@@ -26,6 +26,9 @@ class ConversationViewController: UITableViewController {
         
         title = conversation?.name
         
+        tableView.estimatedRowHeight = 150.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -63,6 +66,7 @@ class ConversationViewController: UITableViewController {
             fatalError("Wrong cell type dequeued")
         }
         cell.configure(with: message)
+        
         return cell
     }
  

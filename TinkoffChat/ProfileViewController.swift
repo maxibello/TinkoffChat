@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController {
         print(#function)
         // Do any additional setup after loading the view, typically from a nib.
         
+        title = "My Profile"
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
         
@@ -51,6 +52,10 @@ class ProfileViewController: UIViewController {
     @IBAction func setProfileImageAction(_ sender: UIButton) {
         print("Выбери изображение профиля")
         pickPhoto()
+    }
+    
+    @IBAction func closeProfile() {
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
