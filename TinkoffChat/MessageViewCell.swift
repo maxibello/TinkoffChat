@@ -24,6 +24,7 @@ class MessageViewCell: UITableViewCell {
     }
     
     func configure(with cellData: Message) {
+        selectionStyle = .none
         messageLabel.text = cellData.text ?? ""
         bubbleView.isIncoming = cellData.isIncoming
     }
