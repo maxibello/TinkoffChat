@@ -11,8 +11,6 @@
 #import "ThemesViewControllerDelegate.h"
 
 @interface ThemesViewController : UIViewController
-    @property id<ThemesViewControllerDelegate> delegate;
-    @property Themes *model;
+    @property (retain, nonatomic) Themes *model;
+    @property (retain, nonatomic) id<ThemesViewControllerDelegate> delegate;
 @end
-
-

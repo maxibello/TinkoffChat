@@ -13,7 +13,7 @@
 		9448D8FA203DD36D00D6D4B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9448D8F8203DD36D00D6D4B3 /* LaunchScreen.storyboard */; };
 		946BCA232055845E0041DE5F /* OutcomingMessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946BCA212055845E0041DE5F /* OutcomingMessageViewCell.xib */; };
 		946F9FEF20470E6E00A337CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 946F9FEE20470E6E00A337CC /* Main.storyboard */; };
-		948EE869205285AD009756F1 /* ConversationsListVeiwController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE868205285AD009756F1 /* ConversationsListVeiwController.swift */; };
+		948EE869205285AD009756F1 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE868205285AD009756F1 /* ConversationsListViewController.swift */; };
 		948EE86B2052884E009756F1 /* ConversationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE86A2052884E009756F1 /* ConversationViewCell.swift */; };
 		948EE86E205297F1009756F1 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE86D205297F1009756F1 /* Conversation.swift */; };
 		948EE8702052A347009756F1 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE86F2052A347009756F1 /* TestData.swift */; };
@@ -36,7 +36,7 @@
 		9448D8FB203DD36D00D6D4B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946BCA212055845E0041DE5F /* OutcomingMessageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OutcomingMessageViewCell.xib; sourceTree = "<group>"; };
 		946F9FEE20470E6E00A337CC /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		948EE868205285AD009756F1 /* ConversationsListVeiwController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListVeiwController.swift; sourceTree = "<group>"; };
+		948EE868205285AD009756F1 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		948EE86A2052884E009756F1 /* ConversationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCell.swift; sourceTree = "<group>"; };
 		948EE86D205297F1009756F1 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		948EE86F2052A347009756F1 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				9448D8F1203DD36D00D6D4B3 /* ProfileViewController.swift */,
-				948EE868205285AD009756F1 /* ConversationsListVeiwController.swift */,
+				948EE868205285AD009756F1 /* ConversationsListViewController.swift */,
 				948EE8732054648A009756F1 /* ConversationViewController.swift */,
 			);
 			path = Controller;
@@ -245,7 +245,7 @@
 				948EE87E20546729009756F1 /* Message.swift in Sources */,
 				9448D8F2203DD36D00D6D4B3 /* ProfileViewController.swift in Sources */,
 				D56F9454206406FA00AF3AFA /* ThemesViewController.m in Sources */,
-				948EE869205285AD009756F1 /* ConversationsListVeiwController.swift in Sources */,
+				948EE869205285AD009756F1 /* ConversationsListViewController.swift in Sources */,
 				948EE8742054648A009756F1 /* ConversationViewController.swift in Sources */,
 				9448D8F0203DD36D00D6D4B3 /* AppDelegate.swift in Sources */,
 				948EE8702052A347009756F1 /* TestData.swift in Sources */,
@@ -384,6 +384,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BG574YTP82;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;
@@ -403,6 +404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BG574YTP82;
 				INFOPLIST_FILE = TinkoffChat/Info.plist;

@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+@import UIKit;
 
 @interface Themes : NSObject
+
+-(void) setTheme1: (UIColor*) theme;
+-(void) setTheme2: (UIColor*) theme;
+-(void) setTheme3: (UIColor*) theme;
+
+-(UIColor*) getTheme1;
+-(UIColor*) getTheme2;
+-(UIColor*) getTheme3;
 
 @end
