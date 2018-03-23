@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationsListVeiwControllerTableViewController: UITableViewController {
+class ConversationsListVeiwController: UITableViewController {
     
     let conversations = TestData.conversations
 
