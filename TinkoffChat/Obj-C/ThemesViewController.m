@@ -17,10 +17,7 @@
 @synthesize delegate = _delegate;
 
 - (void) setDelegate:(id<ThemesViewControllerDelegate>)delegate {
-    if (_delegate != delegate) {
-        [_delegate release];
-        _delegate = [delegate retain];
-    }
+    _delegate = delegate;
 }
 
 - (id<ThemesViewControllerDelegate>) getDelegate {
@@ -28,7 +25,6 @@
 }
 
 - (void) dealloc {
-    [_delegate release];
     [themes release];
     [super dealloc];
 }
