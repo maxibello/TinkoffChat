@@ -13,3 +13,9 @@ func modifyDate(byAdding component: Calendar.Component, value: Int, to date: Dat
     let newDate = calendar.date(byAdding: component, value: value, to: date)
     return newDate
 }
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
+}

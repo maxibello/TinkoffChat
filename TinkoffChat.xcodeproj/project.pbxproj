@@ -25,6 +25,7 @@
 		948EE88020557405009756F1 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE87F20557405009756F1 /* BubbleView.swift */; };
 		D56F9454206406FA00AF3AFA /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D56F9453206406FA00AF3AFA /* ThemesViewController.m */; };
 		D56F945D2064093900AF3AFA /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = D56F945C2064093900AF3AFA /* Themes.m */; };
+		D57192A9206CF50F008CCFE5 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57192A8206CF50F008CCFE5 /* Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		D56F9453206406FA00AF3AFA /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
 		D56F945B2064093900AF3AFA /* Themes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
 		D56F945C2064093900AF3AFA /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
+		D57192A8206CF50F008CCFE5 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		D5C0CF4520640D47004C264C /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 				948EE86D205297F1009756F1 /* Conversation.swift */,
 				948EE87D20546729009756F1 /* Message.swift */,
 				948EE86F2052A347009756F1 /* TestData.swift */,
+				D57192A8206CF50F008CCFE5 /* Profile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				948EE87E20546729009756F1 /* Message.swift in Sources */,
 				9448D8F2203DD36D00D6D4B3 /* ProfileViewController.swift in Sources */,
 				D56F9454206406FA00AF3AFA /* ThemesViewController.m in Sources */,
+				D57192A9206CF50F008CCFE5 /* Profile.swift in Sources */,
 				948EE869205285AD009756F1 /* ConversationsListViewController.swift in Sources */,
 				948EE8742054648A009756F1 /* ConversationViewController.swift in Sources */,
 				9448D8F0203DD36D00D6D4B3 /* AppDelegate.swift in Sources */,

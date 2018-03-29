@@ -8,46 +8,80 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
-    @IBOutlet weak var nameLabel: UILabel!
+class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+    
     @IBOutlet weak var profileImageView: UIImageView!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var editProfileButton: UIButton!
-    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBOutlet weak var setProfileImageView: UIView!
     @IBOutlet weak var setProfileImageButton: UIButton!
     
+    @IBOutlet var gcdButton: UIButton!
+    @IBOutlet var operationButton: UIButton!
+    
     var profileImage: UIImage?
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-//        Доступ к аутлету до загрузки view
-//        print(editProfileButton.frame)
-    }
+    var profileData: Profile?
+        
+    let profileDefaultData = Profile(
+        name: "Maxim Kuznetsov",
+        desc: "Coding with passion, close bugs with agression, finding obsession in release regression...",
+        photo: UIImage(named: "top_proger"))
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        print(#function)
-        // Do any additional setup after loading the view, typically from a nib.
-        
         title = "My Profile"
+        
+        nameTextField.delegate = self
+        descriptionTextView.delegate = self
+        
+        gcdButton.isEnabled = false
+        operationButton.isEnabled = false
+        
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
         
         setProfileImageView.layer.cornerRadius = 40
         
-        editProfileButton.layer.cornerRadius = 10
-        editProfileButton.layer.borderWidth = 1
-        editProfileButton.layer.borderColor = UIColor.black.cgColor
+        nameTextField.borderStyle = .none
+        nameTextField.isEnabled = false
         
-        descriptionLabel.sizeToFit()
+        descriptionTextView.isEditable = false
+        descriptionTextView.isSelectable = false
         
-        // у меня не изменился размер frame
-        print("Edit profile button frame property: \(editProfileButton.frame)")
+        profileData = loadProfile() ?? profileDefaultData
+        updateUI()
     }
+    
+    func updateUI() {
+        if let profileData = profileData {
+            profileImageView.image = profileData.photo
+            nameTextField.text = profileData.name
+            descriptionTextView.text = profileData.desc
+        }
+    }
+    
+    @IBAction func startEditMode(_ sender: UIBarButtonItem) {
+        nameTextField.borderStyle = .roundedRect
+        nameTextField.layer.borderWidth = 2
+        nameTextField.layer.borderColor = UIColor.yellow.cgColor
+        nameTextField.isEnabled = true
+        nameTextField.becomeFirstResponder()
+        
+        descriptionTextView.isEditable = true
+        descriptionTextView.isSelectable = true
+        descriptionTextView.layer.borderWidth = 2
+        descriptionTextView.layer.borderColor = UIColor.yellow.cgColor
+    }
+    
+    @IBAction func saveProfileGCD(_ sender: Any) {
+        saveProfile()
+    }
+    
+    @IBAction func saveProfileOperation(_ sender: Any) {
+    }
+    
     
     @IBAction func setProfileImageAction(_ sender: UIButton) {
         print("Выбери изображение профиля")
@@ -61,8 +95,6 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print(#function)
-        // у меня не изменился размер frame
-        print("Edit profile button frame property: \(editProfileButton.frame)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -89,11 +121,68 @@ class ProfileViewController: UIViewController {
         super.viewWillDisappear(animated)
         print(#function)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print(#function)
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if(string == "\n") {
+            textField.resignFirstResponder()
+            return false
+        }
+        
+        let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        if !text.isEmpty && profileData?.name != text {
+            gcdButton.isEnabled = true
+            operationButton.isEnabled = true
+        } else {
+            gcdButton.isEnabled = false
+            operationButton.isEnabled = false
+        }
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        descriptionTextView.becomeFirstResponder()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        
+        let fullText = (textView.text! as NSString).replacingCharacters(in: range, with: text)
+        
+        if !fullText.isEmpty && profileData?.desc != fullText {
+            gcdButton.isEnabled = true
+            operationButton.isEnabled = true
+        } else {
+            gcdButton.isEnabled = false
+            operationButton.isEnabled = false
+        }
+        
+
+        return true
+    }
+    
+    private func saveProfile() {
+        if let profileData = profileData {
+            let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(profileData, toFile: Profile.archiveURL.path)
+            if isSuccessfulSave {
+                print("Success")
+            } else {
+                print("Failed to save profile")
+            }
+        }
+    }
+    
+    private func loadProfile() -> Profile? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Profile.archiveURL.path) as? Profile
     }
 }
 
@@ -143,6 +232,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         profileImage = info[UIImagePickerControllerEditedImage] as? UIImage
         if let image = profileImage {
             profileImageView.image = image
+            profileData?.photo = image
         }
         dismiss(animated: true, completion: nil)
     }
