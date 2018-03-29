@@ -1,5 +1,5 @@
 //
-//  ConversationsListVeiwControllerTableViewController.swift
+//  ConversationsListViewController.swift
 //  TinkoffChat
 //
 //  Created by MacBookPro on 09/03/2018.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ConversationsListVeiwControllerTableViewController: UITableViewController {
-    
+class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate {
+
     let conversations = TestData.conversations
 
     override func viewDidLoad() {
@@ -22,6 +22,29 @@ class ConversationsListVeiwControllerTableViewController: UITableViewController 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - ThemesViewControllerDelegate
+    
+    func themesViewController(_ controller: ThemesViewController!, didSelectTheme selectedTheme: UIColor!) {
+        logThemeChanging(selectedTheme: selectedTheme)
+    }
+    
+    // MARK:
+    
+    private func logThemeChanging(selectedTheme: UIColor) {
+        let color: String
+        switch selectedTheme {
+        case .red:
+            color = "Red Color"
+        case .yellow:
+            color = "Yellow Color"
+        case .blue:
+            color = "Blue Color"
+        default:
+            color = "Another Color"
+        }
+        print(color)
     }
 
     // MARK: - Table view data source
@@ -80,7 +103,12 @@ class ConversationsListVeiwControllerTableViewController: UITableViewController 
                     conversationVC.conversation = conversations.filter({ $0.online == false })[indexPath.row]
                 }
             }
+        } else if segue.identifier == "ShowThemes" {
+            if let navVC = segue.destination as? UINavigationController {
+                if let themesVC = navVC.topViewController as? ThemesViewController {
+                    themesVC.delegate = self
+                }
+            }
         }
     }
-    
 }
