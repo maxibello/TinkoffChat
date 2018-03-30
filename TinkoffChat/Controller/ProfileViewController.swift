@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet var editProfileButton: UIBarButtonItem!
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -21,67 +22,131 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     @IBOutlet var gcdButton: UIButton!
     @IBOutlet var operationButton: UIButton!
     
-    var profileImage: UIImage?
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
+    let gcdManager = GCDManager()
     var profileData: Profile?
+    var editMode: Bool = false
         
     let profileDefaultData = Profile(
         name: "Maxim Kuznetsov",
-        desc: "Coding with passion, close bugs with agression, finding obsession in release regression...",
-        photo: UIImage(named: "top_proger"))
+        desc: "Coding with passion, closing bugs with agression, getting obsession in release regression...",
+        photo: UIImage(named: "placeholder-user"))
     
     override func viewDidLoad() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillHide, object: nil)
+        
         title = "My Profile"
         
         nameTextField.delegate = self
         descriptionTextView.delegate = self
-        
-        gcdButton.isEnabled = false
-        operationButton.isEnabled = false
         
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
         
         setProfileImageView.layer.cornerRadius = 40
         
-        nameTextField.borderStyle = .none
-        nameTextField.isEnabled = false
-        
-        descriptionTextView.isEditable = false
-        descriptionTextView.isSelectable = false
-        
-        profileData = loadProfile() ?? profileDefaultData
+        loadProfile()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @IBAction func changeEditMode(_ sender: UIBarButtonItem) {
+        editMode = !editMode
         updateUI()
     }
     
-    func updateUI() {
-        if let profileData = profileData {
-            profileImageView.image = profileData.photo
-            nameTextField.text = profileData.name
-            descriptionTextView.text = profileData.desc
+    @IBAction func saveProfileGCD(_ sender: Any) {
+        
+        if let userName = nameTextField.text {
+            activityIndicator.startAnimating()
+            let newProfile = Profile(name: userName, desc: descriptionTextView.text, photo: profileImageView.image)
+            gcdManager.save(profile: newProfile) { [weak self] (success) in
+                DispatchQueue.main.async { self?.activityIndicator.stopAnimating() }
+                if success {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Данные сохранены",
+                                                      message: "",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        alert.addAction(UIAlertAction(title: "OK",
+                                                      style: UIAlertActionStyle.default,
+                                                      handler: {action in
+                                                        self?.editMode = false
+                                                        self?.loadProfile()
+                        }))
+                        self?.present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Ошибка",
+                                                      message: "Не удалось сохранить данные",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Повторить",
+                                                      style: UIAlertActionStyle.default,
+                                                      handler: { action in
+                                                        self?.saveProfileGCD(sender)
+
+                        }))
+                        alert.addAction(UIAlertAction(title: "ОК",
+                                                      style: UIAlertActionStyle.cancel,
+                                                      handler: nil))
+                        self?.present(alert, animated: true, completion: nil)
+                }
+            }
+
         }
     }
-    
-    @IBAction func startEditMode(_ sender: UIBarButtonItem) {
-        nameTextField.borderStyle = .roundedRect
-        nameTextField.layer.borderWidth = 2
-        nameTextField.layer.borderColor = UIColor.yellow.cgColor
-        nameTextField.isEnabled = true
-        nameTextField.becomeFirstResponder()
-        
-        descriptionTextView.isEditable = true
-        descriptionTextView.isSelectable = true
-        descriptionTextView.layer.borderWidth = 2
-        descriptionTextView.layer.borderColor = UIColor.yellow.cgColor
-    }
-    
-    @IBAction func saveProfileGCD(_ sender: Any) {
-        saveProfile()
     }
     
     @IBAction func saveProfileOperation(_ sender: Any) {
+        if let userName = nameTextField.text {
+            activityIndicator.startAnimating()
+            let newProfile = Profile(name: userName, desc: descriptionTextView.text, photo: profileImageView.image)
+            let operationManager = OperationManager(profile: newProfile) { [weak self] (success) in
+                DispatchQueue.main.async { self?.activityIndicator.stopAnimating() }
+                if success {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Данные сохранены",
+                                                      message: "",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        alert.addAction(UIAlertAction(title: "OK",
+                                                      style: UIAlertActionStyle.default,
+                                                      handler: {action in
+                                                        self?.editMode = false
+                                                        self?.loadProfile()
+                        }))
+                        self?.present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Ошибка",
+                                                      message: "Не удалось сохранить данные",
+                                                      preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Повторить",
+                                                      style: UIAlertActionStyle.default,
+                                                      handler: { action in
+                                                        self?.saveProfileOperation(sender)
+                                                        
+                        }))
+                        alert.addAction(UIAlertAction(title: "ОК",
+                                                      style: UIAlertActionStyle.cancel,
+                                                      handler: nil))
+                        self?.present(alert, animated: true, completion: nil)
+                    }
+                }
+                
+            }
+            operationManager.save()
+        }
     }
-    
     
     @IBAction func setProfileImageAction(_ sender: UIButton) {
         print("Выбери изображение профиля")
@@ -92,42 +157,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         dismiss(animated: true, completion: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(#function)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(#function)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print(#function)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print(#function)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print(#function)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print(#function)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        print(#function)
-        // Dispose of any resources that can be recreated.
-    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if(string == "\n") {
             textField.resignFirstResponder()
@@ -136,11 +165,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         
         let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         if !text.isEmpty && profileData?.name != text {
-            gcdButton.isEnabled = true
-            operationButton.isEnabled = true
+            unlockSavingButtons()
         } else {
-            gcdButton.isEnabled = false
-            operationButton.isEnabled = false
+            lockSavingButtons()
         }
         return true
     }
@@ -159,30 +186,87 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         let fullText = (textView.text! as NSString).replacingCharacters(in: range, with: text)
         
         if !fullText.isEmpty && profileData?.desc != fullText {
-            gcdButton.isEnabled = true
-            operationButton.isEnabled = true
+            unlockSavingButtons()
         } else {
-            gcdButton.isEnabled = false
-            operationButton.isEnabled = false
+            lockSavingButtons()
         }
         
 
         return true
     }
     
-    private func saveProfile() {
-        if let profileData = profileData {
-            let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(profileData, toFile: Profile.archiveURL.path)
-            if isSuccessfulSave {
-                print("Success")
-            } else {
-                print("Failed to save profile")
-            }
+    @objc private func handleKeyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            let isShowing = notification.name == .UIKeyboardWillShow
+            
+            self.view.frame.origin.y = isShowing ? -keyboardFrame.height : 0
+            
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
         }
     }
     
-    private func loadProfile() -> Profile? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Profile.archiveURL.path) as? Profile
+    func updateUI() {
+        if let profileData = profileData {
+            profileImageView.image = profileData.photo
+            nameTextField.text = profileData.name
+            descriptionTextView.text = profileData.desc
+        }
+        
+        if (editMode) {
+            editProfileButton.title = "Undo"
+            
+            nameTextField.borderStyle = .roundedRect
+            nameTextField.layer.borderWidth = 2
+            nameTextField.layer.borderColor = UIColor.yellow.cgColor
+            nameTextField.isEnabled = true
+            nameTextField.becomeFirstResponder()
+            
+            descriptionTextView.isEditable = true
+            descriptionTextView.isSelectable = true
+            descriptionTextView.layer.borderWidth = 2
+            descriptionTextView.layer.borderColor = UIColor.yellow.cgColor
+        } else {
+            editProfileButton.title = "Edit"
+            
+            nameTextField.borderStyle = .none
+            nameTextField.layer.borderWidth = 0
+            nameTextField.layer.borderColor = UIColor.clear.cgColor
+            nameTextField.isEnabled = false
+            
+            descriptionTextView.isEditable = false
+            descriptionTextView.isSelectable = false
+            descriptionTextView.layer.borderWidth = 0
+            descriptionTextView.layer.borderColor = UIColor.clear.cgColor
+            
+            lockSavingButtons()
+        }
+    }
+    
+    func lockSavingButtons() {
+        gcdButton.isEnabled = false
+        operationButton.isEnabled = false
+    }
+    
+    func unlockSavingButtons() {
+        gcdButton.isEnabled = true
+        operationButton.isEnabled = true
+    }
+    
+    private func loadProfile() {
+        gcdManager.load { [weak self] (profile) in
+            DispatchQueue.main.async {
+                if let profile = profile {
+                    self?.profileData = profile
+                } else {
+                    self?.profileData = self?.profileDefaultData
+                }
+                self?.updateUI()
+            }
+        }
     }
 }
 
@@ -229,10 +313,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        profileImage = info[UIImagePickerControllerEditedImage] as? UIImage
+        let profileImage = info[UIImagePickerControllerEditedImage] as? UIImage
         if let image = profileImage {
             profileImageView.image = image
-            profileData?.photo = image
+            unlockSavingButtons()
         }
         dismiss(animated: true, completion: nil)
     }

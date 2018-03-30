@@ -26,6 +26,8 @@
 		D56F9454206406FA00AF3AFA /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D56F9453206406FA00AF3AFA /* ThemesViewController.m */; };
 		D56F945D2064093900AF3AFA /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = D56F945C2064093900AF3AFA /* Themes.m */; };
 		D57192A9206CF50F008CCFE5 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57192A8206CF50F008CCFE5 /* Profile.swift */; };
+		D57192C3206E768F008CCFE5 /* GCDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57192C2206E768F008CCFE5 /* GCDManager.swift */; };
+		D57192C5206E96DD008CCFE5 /* OperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57192C4206E96DD008CCFE5 /* OperationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		D56F945B2064093900AF3AFA /* Themes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
 		D56F945C2064093900AF3AFA /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
 		D57192A8206CF50F008CCFE5 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		D57192C2206E768F008CCFE5 /* GCDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDManager.swift; sourceTree = "<group>"; };
+		D57192C4206E96DD008CCFE5 /* OperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationManager.swift; sourceTree = "<group>"; };
 		D5C0CF4520640D47004C264C /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +90,7 @@
 		9448D8EE203DD36D00D6D4B3 /* TinkoffChat */ = {
 			isa = PBXGroup;
 			children = (
+				D57192C6206EC2FB008CCFE5 /* Managers */,
 				D56F9451206406FA00AF3AFA /* TinkoffChat-Bridging-Header.h */,
 				D56F945A206408F200AF3AFA /* Helpers */,
 				D56F9459206408D800AF3AFA /* Obj-C */,
@@ -168,6 +173,15 @@
 				948EE8712053E30D009756F1 /* Functions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D57192C6206EC2FB008CCFE5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D57192C2206E768F008CCFE5 /* GCDManager.swift */,
+				D57192C4206E96DD008CCFE5 /* OperationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,9 +268,11 @@
 				9448D8F0203DD36D00D6D4B3 /* AppDelegate.swift in Sources */,
 				948EE8702052A347009756F1 /* TestData.swift in Sources */,
 				D56F945D2064093900AF3AFA /* Themes.m in Sources */,
+				D57192C3206E768F008CCFE5 /* GCDManager.swift in Sources */,
 				948EE88020557405009756F1 /* BubbleView.swift in Sources */,
 				948EE86B2052884E009756F1 /* ConversationViewCell.swift in Sources */,
 				948EE8772054663C009756F1 /* MessageViewCell.swift in Sources */,
+				D57192C5206E96DD008CCFE5 /* OperationManager.swift in Sources */,
 				948EE8722053E30D009756F1 /* Functions.swift in Sources */,
 				948EE86E205297F1009756F1 /* Conversation.swift in Sources */,
 			);

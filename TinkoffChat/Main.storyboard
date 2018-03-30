@@ -242,6 +242,10 @@
                                     <action selector="saveProfileOperation:" destination="q71-lj-DiZ" eventType="touchUpInside" id="2dC-A4-uSk"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Y8y-Cr-7Sp">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -277,12 +281,14 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="jiO-WF-F2d">
                             <connections>
-                                <action selector="startEditMode:" destination="q71-lj-DiZ" id="eEf-BE-lLZ"/>
+                                <action selector="changeEditMode:" destination="q71-lj-DiZ" id="eEf-BE-lLZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="Y8y-Cr-7Sp" id="AT2-Aa-jXV"/>
                         <outlet property="descriptionTextView" destination="hLb-CH-YwB" id="n1f-9w-vaU"/>
+                        <outlet property="editProfileButton" destination="jiO-WF-F2d" id="i9I-lM-7Sf"/>
                         <outlet property="gcdButton" destination="GzG-MO-9sc" id="KPi-Oo-sD4"/>
                         <outlet property="nameTextField" destination="QXh-qL-3r3" id="glc-MN-y2g"/>
                         <outlet property="operationButton" destination="mgB-iW-eyz" id="Dno-3U-wYG"/>
