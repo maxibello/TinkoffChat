@@ -31,6 +31,7 @@
 		D57192C3206E768F008CCFE5 /* GCDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57192C2206E768F008CCFE5 /* GCDManager.swift */; };
 		D57192C5206E96DD008CCFE5 /* OperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57192C4206E96DD008CCFE5 /* OperationManager.swift */; };
 		D5CD042D2074CA880076557A /* String+generateMessageId.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD042C2074CA880076557A /* String+generateMessageId.swift */; };
+		D5CD0432207509790076557A /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD0431207509790076557A /* NewConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		D57192C4206E96DD008CCFE5 /* OperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationManager.swift; sourceTree = "<group>"; };
 		D5C0CF4520640D47004C264C /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
 		D5CD042C2074CA880076557A /* String+generateMessageId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+generateMessageId.swift"; sourceTree = "<group>"; };
+		D5CD0431207509790076557A /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				9448D8F1203DD36D00D6D4B3 /* ProfileViewController.swift */,
 				948EE868205285AD009756F1 /* ConversationsListViewController.swift */,
 				948EE8732054648A009756F1 /* ConversationViewController.swift */,
+				D5CD0431207509790076557A /* NewConversationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				948EE8772054663C009756F1 /* MessageViewCell.swift in Sources */,
 				D57192C5206E96DD008CCFE5 /* OperationManager.swift in Sources */,
 				948EE8722053E30D009756F1 /* Functions.swift in Sources */,
+				D5CD0432207509790076557A /* NewConversationViewController.swift in Sources */,
 				948EE86E205297F1009756F1 /* Conversation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

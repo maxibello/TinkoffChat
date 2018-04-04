@@ -13,6 +13,7 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
 //    let conversations = TestData.conversations
     var conversations: [Conversation] = []
     let communicator = MultipeerCommunicator()
+    var messageCache: [String: [Message]]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
         communicator.delegate = self
         
         title = "Tinkoff Chat"
+        messageCache = [:]
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,13 +99,16 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowConversation" {
-            if let conversationVC = segue.destination as? ConversationViewController,
+            if let conversationVC = segue.destination as? NewConversationViewController,
                 let indexPath = tableView.indexPathForSelectedRow {
 //                if indexPath.section == 0 {
 //                    conversationVC.conversation = conversations.filter({ $0.online == true })[indexPath.row]
 //                } else {
 //                    conversationVC.conversation = conversations.filter({ $0.online == false })[indexPath.row]
 //                }
+                conversationVC.conversation = conversations[indexPath.row]
+                conversationVC.messageCache = messageCache
+                conversationVC.communicator = communicator
             }
         } else if segue.identifier == "ShowThemes" {
             if let navVC = segue.destination as? UINavigationController {
@@ -141,6 +146,14 @@ extension ConversationsListViewController: CommunicatorDelegate {
     
     func didReceiveMessage(text: String, fromUser: String, toUser: String) {
         print("DID RECEIVE MESSAGE")
+    }
+    
+}
+
+extension ConversationsListViewController: IMessageCache {
+    
+    func updateCache(userID: String, message: Message) {
+        messageCache?[userID]?.append(message)
     }
     
 }
