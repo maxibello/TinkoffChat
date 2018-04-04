@@ -10,11 +10,15 @@ import UIKit
 
 class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate {
 
-    let conversations = TestData.conversations
+//    let conversations = TestData.conversations
+    var conversations: [Conversation] = []
+    let communicator = MultipeerCommunicator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
+        
+        communicator.delegate = self
         
         title = "Tinkoff Chat"
     }
@@ -29,8 +33,6 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
     func themesViewController(_ controller: ThemesViewController!, didSelectTheme selectedTheme: UIColor!) {
         logThemeChanging(selectedTheme: selectedTheme)
     }
-    
-    // MARK:
     
     private func logThemeChanging(selectedTheme: UIColor) {
         let color: String
@@ -74,18 +76,18 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let filteredConversations: [Conversation]
+//        let filteredConversations: [Conversation]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as? ConversationViewCell else {
             fatalError("Wrong cell type dequeued")
         }
         
-        if indexPath.section == 0 {
-            filteredConversations = conversations.filter { $0.online == true }
-        } else {
-            filteredConversations = conversations.filter { $0.online == false }
-        }
-        cell.configureCell(conversationCell: filteredConversations[indexPath.row])
+//        if indexPath.section == 0 {
+//            filteredConversations = conversations.filter { $0.online == true }
+//        } else {
+//            filteredConversations = conversations.filter { $0.online == false }
+//        }
+        cell.configureCell(conversationCell: conversations[indexPath.row])
 
         return cell
     }
@@ -97,11 +99,11 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
         if segue.identifier == "ShowConversation" {
             if let conversationVC = segue.destination as? ConversationViewController,
                 let indexPath = tableView.indexPathForSelectedRow {
-                if indexPath.section == 0 {
-                    conversationVC.conversation = conversations.filter({ $0.online == true })[indexPath.row]
-                } else {
-                    conversationVC.conversation = conversations.filter({ $0.online == false })[indexPath.row]
-                }
+//                if indexPath.section == 0 {
+//                    conversationVC.conversation = conversations.filter({ $0.online == true })[indexPath.row]
+//                } else {
+//                    conversationVC.conversation = conversations.filter({ $0.online == false })[indexPath.row]
+//                }
             }
         } else if segue.identifier == "ShowThemes" {
             if let navVC = segue.destination as? UINavigationController {
@@ -111,4 +113,34 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
             }
         }
     }
+}
+
+extension ConversationsListViewController: CommunicatorDelegate {
+    func didFoundUser(userID: String, userName: String?) {
+        print("FOUND USER")
+        let conversation = Conversation(userID: userID, online: true, hasUnreadMessages: false, name: userName, message: nil, date: nil)
+        conversations.append(conversation)
+        tableView.reloadData()
+    }
+    
+    func didLostUser(userID: String) {
+        print("LOST USER")
+        if let foundedUserId = conversations.index(where: {$0.userID == userID}) {
+            conversations.remove(at: foundedUserId)
+        }
+        tableView.reloadData()
+    }
+    
+    func failedToStartBrowsingForUsers(error: Error) {
+        print("FAILED TO START BROWSING")
+    }
+    
+    func failedTostartAdvertising(error: Error) {
+        print("FAILED TO START ADVERTISING")
+    }
+    
+    func didReceiveMessage(text: String, fromUser: String, toUser: String) {
+        print("DID RECEIVE MESSAGE")
+    }
+    
 }

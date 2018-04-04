@@ -17,13 +17,15 @@ protocol ConversationCellConfiguration: class {
 }
 
 class Conversation: ConversationCellConfiguration {
+    var userID: String
     var name: String?
     var message: String?
     var date: Date?
     var online: Bool = false
     var hasUnreadMessages: Bool = false
     
-    init(online: Bool, hasUnreadMessages: Bool, name: String? = nil, message: String? = nil, date: Date? = nil) {
+    init(userID: String, online: Bool, hasUnreadMessages: Bool, name: String? = nil, message: String? = nil, date: Date? = nil) {
+        self.userID = userID
         self.online = online
         self.hasUnreadMessages = hasUnreadMessages
         self.name = name
