@@ -18,7 +18,6 @@
 		948EE86E205297F1009756F1 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE86D205297F1009756F1 /* Conversation.swift */; };
 		948EE8702052A347009756F1 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE86F2052A347009756F1 /* TestData.swift */; };
 		948EE8722053E30D009756F1 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE8712053E30D009756F1 /* Functions.swift */; };
-		948EE8742054648A009756F1 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE8732054648A009756F1 /* ConversationViewController.swift */; };
 		948EE8772054663C009756F1 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE8752054663C009756F1 /* MessageViewCell.swift */; };
 		948EE8782054663C009756F1 /* IncomingMessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 948EE8762054663C009756F1 /* IncomingMessageViewCell.xib */; };
 		948EE87E20546729009756F1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948EE87D20546729009756F1 /* Message.swift */; };
@@ -48,7 +47,6 @@
 		948EE86D205297F1009756F1 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		948EE86F2052A347009756F1 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		948EE8712053E30D009756F1 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
-		948EE8732054648A009756F1 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		948EE8752054663C009756F1 /* MessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCell.swift; sourceTree = "<group>"; };
 		948EE8762054663C009756F1 /* IncomingMessageViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingMessageViewCell.xib; sourceTree = "<group>"; };
 		948EE87D20546729009756F1 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 			children = (
 				9448D8F1203DD36D00D6D4B3 /* ProfileViewController.swift */,
 				948EE868205285AD009756F1 /* ConversationsListViewController.swift */,
-				948EE8732054648A009756F1 /* ConversationViewController.swift */,
 				D5CD0431207509790076557A /* NewConversationViewController.swift */,
 			);
 			path = Controller;
@@ -285,7 +282,6 @@
 				D57192A9206CF50F008CCFE5 /* Profile.swift in Sources */,
 				94D1A8D220715AC800A3A17C /* ICommunicatorDelegate.swift in Sources */,
 				948EE869205285AD009756F1 /* ConversationsListViewController.swift in Sources */,
-				948EE8742054648A009756F1 /* ConversationViewController.swift in Sources */,
 				9448D8F0203DD36D00D6D4B3 /* AppDelegate.swift in Sources */,
 				D5CD042D2074CA880076557A /* String+generateMessageId.swift in Sources */,
 				948EE8702052A347009756F1 /* TestData.swift in Sources */,

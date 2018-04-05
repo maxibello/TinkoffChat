@@ -21,10 +21,11 @@ class NewConversationViewController: UIViewController, UITableViewDataSource, UI
     var messageCacheDelegate: IMessageCache?
     
     var communicator: MultipeerCommunicator?
-    var messageCache: [String: [Message]]?
+    var conversationMessageCache: [Message]?
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var messageTextField: UITextField!
+    @IBOutlet var sendMessageButton: UIButton!
     
     @IBAction func sendMessageAction(_ sender: Any) {
         if let text = messageTextField.text {
@@ -38,15 +39,21 @@ class NewConversationViewController: UIViewController, UITableViewDataSource, UI
                         }
                     }
                     // сохраняем в cache
-                    messageCacheDelegate?.updateCache(userID: userID, message: Message(isIncoming: false, text: text))
-                    
+                    let ouctomingMessage = Message(isIncoming: false, text: text)
+                    messageCacheDelegate?.updateCache(userID: userID, message: ouctomingMessage)
+                    conversationMessageCache?.append(ouctomingMessage)
+                    updateUI()
                 }
-//                Message.saveMessage(with: conversationId, text: text, isIncoming: false)
                 
                 messageTextField.text = ""
             }
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -62,6 +69,11 @@ class NewConversationViewController: UIViewController, UITableViewDataSource, UI
         tableView.estimatedRowHeight = 150.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
+        
+        communicator?.conversationDelegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillHide, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,12 +90,14 @@ class NewConversationViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return messages.count
+        return conversationMessageCache?.count ?? 0
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = messages[indexPath.row]
+        guard let message = conversationMessageCache?[indexPath.row] else {
+            fatalError("Filed to get message from cache")
+        }
         let cellIdentifier: String
         if message.isIncoming {
             cellIdentifier = incomingMessageCellID
@@ -97,5 +111,60 @@ class NewConversationViewController: UIViewController, UITableViewDataSource, UI
         
         return cell
     }
+    
+    func updateUI() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    @objc private func handleKeyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            let isShowing = notification.name == .UIKeyboardWillShow
+            
+            self.view.frame.origin.y = isShowing ? -keyboardFrame.height : 0
+            
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
 
+}
+
+extension NewConversationViewController: CommunicatorDelegate {
+    func didFoundUser(userID: String, userName: String?) {
+        DispatchQueue.main.async {
+            self.sendMessageButton.isEnabled = true
+        }
+    }
+    
+    func didLostUser(userID: String) {
+        DispatchQueue.main.async {
+            self.sendMessageButton.isEnabled = false
+        }
+    }
+    
+    func failedToStartBrowsingForUsers(error: Error) {
+        
+    }
+    
+    func failedTostartAdvertising(error: Error) {
+        
+    }
+    
+    func didReceiveMessage(text: String, fromUser: String, toUser: String) {
+        if let userID = conversation?.userID {
+            let receivedMessage = Message(isIncoming: true, text: text)
+            messageCacheDelegate?.updateCache(userID: userID, message: receivedMessage)
+            if fromUser == conversation?.userID {
+                conversationMessageCache?.append(receivedMessage)
+                updateUI()
+            }
+        }
+    }
+    
+    
 }

@@ -9,8 +9,7 @@
 import UIKit
 
 class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate {
-
-//    let conversations = TestData.conversations
+    
     var conversations: [Conversation] = []
     let communicator = MultipeerCommunicator()
     var messageCache: [String: [Message]]?
@@ -78,18 +77,19 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let filteredConversations: [Conversation]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as? ConversationViewCell else {
             fatalError("Wrong cell type dequeued")
         }
         
-//        if indexPath.section == 0 {
-//            filteredConversations = conversations.filter { $0.online == true }
-//        } else {
-//            filteredConversations = conversations.filter { $0.online == false }
-//        }
-        cell.configureCell(conversationCell: conversations[indexPath.row])
+        let conversation = conversations[indexPath.row]
+        if let messages = messageCache?[conversation.userID],
+            messages.count > 0 {
+            let lastMessage = messages.last!
+            conversation.date = lastMessage.date
+            conversation.message = lastMessage.text
+        }
+        cell.configureCell(conversationCell: conversation)
 
         return cell
     }
@@ -101,14 +101,13 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
         if segue.identifier == "ShowConversation" {
             if let conversationVC = segue.destination as? NewConversationViewController,
                 let indexPath = tableView.indexPathForSelectedRow {
-//                if indexPath.section == 0 {
-//                    conversationVC.conversation = conversations.filter({ $0.online == true })[indexPath.row]
-//                } else {
-//                    conversationVC.conversation = conversations.filter({ $0.online == false })[indexPath.row]
-//                }
-                conversationVC.conversation = conversations[indexPath.row]
-                conversationVC.messageCache = messageCache
+
+                let conversation = conversations[indexPath.row]
+                conversation.hasUnreadMessages = false
+                conversationVC.conversation = conversation
+                conversationVC.conversationMessageCache = messageCache?[conversation.userID] ?? []
                 conversationVC.communicator = communicator
+                conversationVC.messageCacheDelegate = self
             }
         } else if segue.identifier == "ShowThemes" {
             if let navVC = segue.destination as? UINavigationController {
@@ -118,34 +117,67 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
             }
         }
     }
+    
+    func updateConversation(userID: String, message: Message) {
+        if let conversation = conversations.first(where: {$0.userID == userID}) {
+            conversation.date = message.date
+            conversation.hasUnreadMessages = true
+            conversation.message = message.text
+        }
+        updateTableView()
+    }
+    
+    func updateTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func sortedConversations() -> [Conversation] {
+        return conversations.sorted(by: { conversation1, conversation2 in
+            if let date1 = conversation1.date, let date2 = conversation2.date {
+                return date1 > date2
+            } else {
+                return conversation1.name!.compare(conversation2.name!) == .orderedAscending
+            }
+        })
+    }
 }
 
 extension ConversationsListViewController: CommunicatorDelegate {
     func didFoundUser(userID: String, userName: String?) {
-        print("FOUND USER")
-        let conversation = Conversation(userID: userID, online: true, hasUnreadMessages: false, name: userName, message: nil, date: nil)
-        conversations.append(conversation)
-        tableView.reloadData()
+        if !conversations.contains(where: {$0.userID == userID}) {
+            let conversation = Conversation(userID: userID, online: true, hasUnreadMessages: false, name: userName, message: nil, date: nil)
+            conversations.append(conversation)
+            print(conversation.userID)
+            updateTableView()
+        }
+
     }
     
     func didLostUser(userID: String) {
-        print("LOST USER")
         if let foundedUserId = conversations.index(where: {$0.userID == userID}) {
             conversations.remove(at: foundedUserId)
         }
-        tableView.reloadData()
+        updateTableView()
     }
     
     func failedToStartBrowsingForUsers(error: Error) {
-        print("FAILED TO START BROWSING")
+        print("Failed to start browsing")
     }
     
     func failedTostartAdvertising(error: Error) {
-        print("FAILED TO START ADVERTISING")
+        print("Failed to start advertising")
     }
     
     func didReceiveMessage(text: String, fromUser: String, toUser: String) {
-        print("DID RECEIVE MESSAGE")
+        print("Did receive message")
+        if messageCache?[fromUser] == nil {
+            messageCache?[fromUser] = []
+        }
+        let incomingMessage = Message(isIncoming: true, text: text)
+        messageCache?[fromUser]?.append(incomingMessage)
+        updateConversation(userID: fromUser, message: incomingMessage)
     }
     
 }
@@ -153,7 +185,11 @@ extension ConversationsListViewController: CommunicatorDelegate {
 extension ConversationsListViewController: IMessageCache {
     
     func updateCache(userID: String, message: Message) {
+        if messageCache?[userID] == nil {
+            messageCache?[userID] = []
+        }
         messageCache?[userID]?.append(message)
+        updateTableView()
     }
     
 }

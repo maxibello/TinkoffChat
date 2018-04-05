@@ -162,24 +162,6 @@
             </objects>
             <point key="canvasLocation" x="-699.375" y="32.74647887323944"/>
         </scene>
-        <!--Conversation View Controller-->
-        <scene sceneID="9et-Ig-JP9">
-            <objects>
-                <tableViewController id="jCU-GX-6w1" customClass="ConversationViewController" customModule="TinkoffChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PhK-df-1Ji">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <connections>
-                            <outlet property="dataSource" destination="jCU-GX-6w1" id="RXd-8a-0h1"/>
-                            <outlet property="delegate" destination="jCU-GX-6w1" id="10f-1b-aIT"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gl2-TG-R9h" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="377" y="33"/>
-        </scene>
         <!--Profile View Controller-->
         <scene sceneID="CZf-NV-vVL">
             <objects>
@@ -378,6 +360,7 @@
                     </view>
                     <connections>
                         <outlet property="messageTextField" destination="V1j-wG-MX5" id="pe3-mF-Gd3"/>
+                        <outlet property="sendMessageButton" destination="5zv-ke-uvI" id="E15-lP-FXb"/>
                         <outlet property="tableView" destination="A9Q-Bg-dlz" id="fPj-C9-f8T"/>
                     </connections>
                 </viewController>

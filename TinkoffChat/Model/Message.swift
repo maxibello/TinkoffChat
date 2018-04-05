@@ -16,10 +16,12 @@ protocol MessageCellConfiguration {
 class Message: MessageCellConfiguration {
     var text: String?
     var isIncoming: Bool
+    let date: Date
     
     init(isIncoming: Bool, text: String? = nil) {
         self.text = text
         self.isIncoming = isIncoming
+        self.date = Date()
     }
     
 }
