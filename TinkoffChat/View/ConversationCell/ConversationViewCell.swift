@@ -48,6 +48,8 @@ class ConversationViewCell: UITableViewCell {
         
         if conversationCell.hasUnreadMessages {
             messageLabel.font = UIFont.boldSystemFont(ofSize: 15.0)
+        } else {
+            messageLabel.font = UIFont.systemFont(ofSize: 15.0)
         }
         
         if conversationCell.online {

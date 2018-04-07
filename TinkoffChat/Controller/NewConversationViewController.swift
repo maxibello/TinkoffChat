@@ -10,6 +10,7 @@ import UIKit
 
 protocol IMessageCache {
     func updateCache(userID: String, message: Message)
+    func updateConversations(userID: String)
 }
 
 class NewConversationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -74,6 +75,11 @@ class NewConversationViewController: UIViewController, UITableViewDataSource, UI
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillHide, object: nil)
+        
+        if let userID = conversation?.userID {
+            messageCacheDelegate?.updateConversations(userID: userID)
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {

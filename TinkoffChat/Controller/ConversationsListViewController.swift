@@ -81,8 +81,8 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as? ConversationViewCell else {
             fatalError("Wrong cell type dequeued")
         }
-        
-        let conversation = conversations[indexPath.row]
+        let sorted = sortedConversations()
+        let conversation = sorted[indexPath.row]
         if let messages = messageCache?[conversation.userID],
             messages.count > 0 {
             let lastMessage = messages.last!
@@ -102,7 +102,8 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
             if let conversationVC = segue.destination as? NewConversationViewController,
                 let indexPath = tableView.indexPathForSelectedRow {
 
-                let conversation = conversations[indexPath.row]
+                let sorted = sortedConversations()
+                let conversation = sorted[indexPath.row]
                 conversation.hasUnreadMessages = false
                 conversationVC.conversation = conversation
                 conversationVC.conversationMessageCache = messageCache?[conversation.userID] ?? []
@@ -118,10 +119,10 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
         }
     }
     
-    func updateConversation(userID: String, message: Message) {
+    func updateConversation(userID: String, message: Message, unreadMessages: Bool = true) {
         if let conversation = conversations.first(where: {$0.userID == userID}) {
             conversation.date = message.date
-            conversation.hasUnreadMessages = true
+            conversation.hasUnreadMessages = unreadMessages
             conversation.message = message.text
         }
         updateTableView()
@@ -135,7 +136,11 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
     
     func sortedConversations() -> [Conversation] {
         return conversations.sorted(by: { conversation1, conversation2 in
-            if let date1 = conversation1.date, let date2 = conversation2.date {
+            if conversation1.date != nil && conversation2.date == nil {
+                return true
+            } else if conversation1.date == nil && conversation2.date != nil {
+                return false
+            } else if let date1 = conversation1.date, let date2 = conversation2.date {
                 return date1 > date2
             } else {
                 return conversation1.name!.compare(conversation2.name!) == .orderedAscending
@@ -189,7 +194,13 @@ extension ConversationsListViewController: IMessageCache {
             messageCache?[userID] = []
         }
         messageCache?[userID]?.append(message)
-        updateTableView()
+        updateConversation(userID: userID, message: message, unreadMessages: false)
     }
     
+    func updateConversations(userID: String) {
+        if let conversation = conversations.first(where: {$0.userID == userID}) {
+            conversation.hasUnreadMessages = false
+        }
+        updateTableView()
+    }
 }

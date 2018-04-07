@@ -23,14 +23,14 @@ class MultipeerCommunicator: NSObject, Communicator {
     let advertiser: MCNearbyServiceAdvertiser
     let browser: MCNearbyServiceBrowser
     
-    let localPeerID = MCPeerID(displayName: UIDevice.current.name)
+    let localPeerID = MCPeerID(displayName: "A Hero")
     
     var sessions = [String: MCSession]()
     var online: Bool
     
     override init() {
         advertiser = MCNearbyServiceAdvertiser(peer: localPeerID,
-                                               discoveryInfo: ["userName": "Taxedo Mask"],
+                                               discoveryInfo: ["userName": "A Hero"],
                                                    serviceType: serviceType)
         
         browser = MCNearbyServiceBrowser(peer: localPeerID,
