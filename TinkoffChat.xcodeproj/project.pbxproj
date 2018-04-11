@@ -121,9 +121,7 @@
 				9448D8FB203DD36D00D6D4B3 /* Info.plist */,
 				946F9FEE20470E6E00A337CC /* Main.storyboard */,
 				D5CD042C2074CA880076557A /* String+generateMessageId.swift */,
-				D58B858E207E36F700F6E95F /* CoreDataStack.swift */,
 				D58B8590207E37AB00F6E95F /* tinkoff_chat_model.xcdatamodeld */,
-				D58B8593207E45CC00F6E95F /* StorageManager.swift */,
 			);
 			path = TinkoffChat;
 			sourceTree = "<group>";
@@ -218,6 +216,8 @@
 		D58B859D207E4C2A00F6E95F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				D58B8593207E45CC00F6E95F /* StorageManager.swift */,
+				D58B858E207E36F700F6E95F /* CoreDataStack.swift */,
 				D58B859E207E4CC000F6E95F /* AppUser.swift */,
 				D58B85A3207E5D7800F6E95F /* User.swift */,
 			);

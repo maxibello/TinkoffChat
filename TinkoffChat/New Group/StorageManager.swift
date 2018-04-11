@@ -59,4 +59,22 @@ class StorageManager {
         
         return appUser
     }
+    
+    private static func saveToStorage(profile: Profile) -> Bool {
+        
+        if let context = StorageManager.coreDataStack?.saveContext {
+            if let appUser = StorageManager.findOrInsertAppUser(in: context)?.currentUser {
+                appUser.name = profile.name
+                appUser.additionalInfo = profile.desc
+                if let profilePhoto = profile.photo {
+                    appUser.image =  UIImagePNGRepresentation(profilePhoto) as Data?
+                }
+                StorageManager.coreDataStack?.performSave(context: context, completion: {})
+                
+                return true
+            }
+        }
+        
+        return false
+    }
 }
