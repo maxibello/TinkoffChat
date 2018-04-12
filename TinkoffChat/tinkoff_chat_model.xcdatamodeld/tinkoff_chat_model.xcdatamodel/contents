@@ -10,6 +10,8 @@
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="currentAppUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppUser" inverseName="currentUser" inverseEntity="AppUser" syncable="YES"/>
     </entity>
+    <fetchRequest name="AppUser" entity="AppUser"/>
+    <fetchRequest name="User" entity="User" predicateString="userId == $id"/>
     <elements>
         <element name="AppUser" positionX="-63" positionY="-18" width="128" height="60"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="120"/>

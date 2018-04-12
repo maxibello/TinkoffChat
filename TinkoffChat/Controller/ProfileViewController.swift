@@ -20,7 +20,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     @IBOutlet weak var setProfileImageButton: UIButton!
     
     @IBOutlet var gcdButton: UIButton!
-    @IBOutlet var operationButton: UIButton!
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
@@ -34,6 +33,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         photo: UIImage(named: "placeholder-user"))
     
     override func viewDidLoad() {
+        
+        print(getDocumentsDirectory())
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillHide, object: nil)
@@ -65,6 +66,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
         if let userName = nameTextField.text {
             activityIndicator.startAnimating()
             let newProfile = Profile(name: userName, desc: descriptionTextView.text, photo: profileImageView.image)
+            StorageManager.save()
             gcdManager.save(profile: newProfile) { [weak self] (success) in
                 DispatchQueue.main.async { self?.activityIndicator.stopAnimating() }
                 if success {
@@ -91,49 +93,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
                                                       style: UIAlertActionStyle.default,
                                                       handler: { action in
                                                         self?.saveProfileGCD(sender)
-
-                        }))
-                        alert.addAction(UIAlertAction(title: "ОК",
-                                                      style: UIAlertActionStyle.cancel,
-                                                      handler: nil))
-                        self?.present(alert, animated: true, completion: nil)
-                }
-            }
-
-        }
-    }
-    }
-    
-    @IBAction func saveProfileOperation(_ sender: Any) {
-        if let userName = nameTextField.text {
-            activityIndicator.startAnimating()
-            let newProfile = Profile(name: userName, desc: descriptionTextView.text, photo: profileImageView.image)
-            let operationManager = OperationManager(profile: newProfile) { [weak self] (success) in
-                DispatchQueue.main.async { self?.activityIndicator.stopAnimating() }
-                if success {
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Данные сохранены",
-                                                      message: "",
-                                                      preferredStyle: UIAlertControllerStyle.alert)
-                        
-                        alert.addAction(UIAlertAction(title: "OK",
-                                                      style: UIAlertActionStyle.default,
-                                                      handler: {action in
-                                                        self?.editMode = false
-                                                        self?.loadProfile()
-                        }))
-                        self?.present(alert, animated: true, completion: nil)
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Ошибка",
-                                                      message: "Не удалось сохранить данные",
-                                                      preferredStyle: UIAlertControllerStyle.alert)
-                        
-                        alert.addAction(UIAlertAction(title: "Повторить",
-                                                      style: UIAlertActionStyle.default,
-                                                      handler: { action in
-                                                        self?.saveProfileOperation(sender)
                                                         
                         }))
                         alert.addAction(UIAlertAction(title: "ОК",
@@ -144,7 +103,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
                 }
                 
             }
-            operationManager.save()
         }
     }
     
@@ -248,12 +206,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITextViewDe
     
     func lockSavingButtons() {
         gcdButton.isEnabled = false
-        operationButton.isEnabled = false
     }
     
     func unlockSavingButtons() {
         gcdButton.isEnabled = true
-        operationButton.isEnabled = true
     }
     
     private func loadProfile() {

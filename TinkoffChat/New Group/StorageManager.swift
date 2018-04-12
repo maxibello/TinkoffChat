@@ -31,6 +31,14 @@ class StorageManager {
         }
     }
     
+    static func getAppUser() -> AppUser? {
+        if let context = self.coreDataStack?.saveContext {
+            return findOrInsertAppUser(in: context)
+        }
+        
+        return nil
+    }
+    
     static func findOrInsertAppUser(in context: NSManagedObjectContext) -> AppUser? {
         guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
             print("Model is not availible in context!")
@@ -60,7 +68,7 @@ class StorageManager {
         return appUser
     }
     
-    private static func saveToStorage(profile: Profile) -> Bool {
+    static func saveToStorage(profile: Profile) -> Bool {
         
         if let context = StorageManager.coreDataStack?.saveContext {
             if let appUser = StorageManager.findOrInsertAppUser(in: context)?.currentUser {

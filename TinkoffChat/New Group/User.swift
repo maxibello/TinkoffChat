@@ -43,10 +43,10 @@ extension User {
     }
     
     static func insertAppUser(with: String, in context: NSManagedObjectContext) -> User? {
-        let appUser = insertUser(in: context, name: "Name Surname", userId: userId)
-        appUser?.additionalInfo = "Some info"
+        let appUser = insertUser(in: context, name: "John Appleseed", userId: userId)
+        appUser?.additionalInfo = "Some useful info about me"
         appUser?.image = nil
-        
+
         return appUser
     }
     
